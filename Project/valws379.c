@@ -94,7 +94,10 @@ int main(int argc, char* argv[])
 
   gnuplotPipe = popen ("gnuplot", "w");
   fprintf(gnuplotPipe, "set terminal pngcairo  transparent enhanced font 'arial,10' fontscale 1.0 size 2000, 400\n");
-  fprintf(gnuplotPipe, "set output 'test.png'\n");
+  fprintf(gnuplotPipe, "set output 'histogram.png'\n");
+  fprintf(gnuplotPipe, "set title 'Page Useage Histogram'\n");
+  fprintf(gnuplotPipe, "set xlabel 'Instructions'\n");
+  fprintf(gnuplotPipe, "set ylabel 'Pages Used'\n");
   fprintf(gnuplotPipe, "plot '-' \n");
 
   struct sigaction sig_action;
