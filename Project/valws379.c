@@ -21,9 +21,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <signal.h>
 
 #include "linklist.c"
 #include "hash4.c"
+
+FILE * gnuplotPipe;
 
 int digitsToInclude(int pgSize) {
   /* maps the page size of the os (given by the user) to a count of digits in
@@ -38,6 +41,25 @@ int digitsToInclude(int pgSize) {
   else if (pgSize <= 4096) {return 5;}
   else {return 4;}
 }
+
+static void sigHandler(int signo) {
+  /* Basic signal handler provides handling for SIGINT
+   *
+   * SIGINT exits the program
+   *
+   * Args:
+   *     signo(int): interger representing the signal recieved
+   *
+   * Returns: void
+   */
+
+  if (signo == SIGINT) {
+    end();
+    fprintf(gnuplotPipe, "e");
+    exit(0);
+  }
+}
+
 
 int main(int argc, char* argv[])
 {
@@ -70,7 +92,16 @@ int main(int argc, char* argv[])
 
   int DTI = digitsToInclude(pgSize);
 
-  int counter = 0;
+  gnuplotPipe = popen ("gnuplot", "w");
+  fprintf(gnuplotPipe, "set terminal pngcairo  transparent enhanced font 'arial,10' fontscale 1.0 size 600, 400\n");
+  fprintf(gnuplotPipe, "set output 'test.png'\n");
+  fprintf(gnuplotPipe, "plot '-' \n");
+
+  struct sigaction sig_action;
+  sig_action.sa_handler = &sigHandler;
+  sigaction(SIGINT, &sig_action, NULL);
+
+  long counter = 0;
   while(getline(&buffer, &n, stdin) != -1) {
     //parse the sting, making it come in tuple form
     
@@ -89,16 +120,19 @@ int main(int argc, char* argv[])
     addEntry(hashVal);
     //printf("+%i ", hashVal);
     
-    counter++;
+    
     
     if(counter > windowSize) {
       //Decremnt last item in box
       hashVal = delFirstEntryAndReturnHash();
       decrement(hashVal);
       //printf("-%i ", hashVal);
-      counter--;
     }
-    printNoOfEntrys();
+    hashVal = NoOfEntrys();
+    printf("%i\n", hashVal);
+    fprintf(gnuplotPipe, "%li %i\n", counter, hashVal);
+    counter++;
   }
   end();
+  fprintf(gnuplotPipe, "e");
 }

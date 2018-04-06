@@ -7,6 +7,6 @@
 
 getopts i: option
 case $option in
-i) ./valgrinder.o $2 $3 $option;;
-*) ./valgridner.o $1 $2;;
+i) ./valws379 $2 $3 $option;;
+*) ./valws379 $1 $2;;
 esac

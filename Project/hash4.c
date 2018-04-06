@@ -67,7 +67,7 @@ void printTheTable() {
   }
 }
 
-void printNoOfEntrys() {
+int NoOfEntrys() {
   /*prints the number of entries in the hash table that have a non-zero content
    *
    * Args: None
@@ -80,7 +80,7 @@ void printNoOfEntrys() {
       count++;
     }
   }
-  printf("%i\n",count);
+  return count;
 }
 
 int hashf(char* toHash) {
