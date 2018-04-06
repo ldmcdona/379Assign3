@@ -1,6 +1,6 @@
 make:
-	gcc -std=c99 valgrinder.c -o valgrinder.o -lpthread
+	gcc -std=c99 valws379.c -o valws379 -lpthread
 run:
-	./valgrinder.o
+	./valws379
 clean:
-	rm *.o
+	rm valws379
