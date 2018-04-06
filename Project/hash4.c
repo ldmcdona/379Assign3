@@ -23,6 +23,16 @@ void printTheTable() {
   }
 }
 
+void printNoOfEntrys() {
+  int count = 0;
+  for(int i=0; i<hash; i++) {
+    if(c[i] != 0) {
+      count++;
+    }
+  }
+  printf("%i\n",count);
+}
+
 int hashf(char* toHash) {
   int x = 0;
   for(int j=0; j<strlen(toHash); j++){
@@ -43,8 +53,8 @@ void end() {
   free(c);
 }
 
-/*
-int main() {
+
+int testhash() {
   int hashBuff;
   char* a;
   char* d;
@@ -78,7 +88,6 @@ int main() {
   printf("Enter C to clear the hash table\n");
   printf("Begin your string with * to decrement\n");
   printf("Enter a string to hash: ");
-
   while(scanf("%s", b) != EOF){
     if(strcmp(a, b) == 0){
       end();
@@ -102,4 +111,3 @@ int main() {
   
   return 0;
 }
-*/

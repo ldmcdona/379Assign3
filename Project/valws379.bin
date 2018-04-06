@@ -1,0 +1,5 @@
+getopts i: option
+case $option in
+i) ./main.o $2 $3 $option;;
+*) ./main.o $1 $2;;
+esac
