@@ -1,6 +1,6 @@
 make:
-	gcc -std=c99 main.c -o main.o -lpthread
+	gcc -std=c99 valgrinder.c -o valgrinder.o -lpthread
 run:
-	./main.o
+	./valgrinder.o
 clean:
 	rm *.o

@@ -1,6 +1,8 @@
 /******************************************
  *
- * linklist.c - Modified 2018-02-02
+ * linklist.c - Modified 2018-04-05
+ *
+ * addapted from linklist.c in project 1
  *
  * Created by:
  * Craig Lindsay 1391493
@@ -13,9 +15,10 @@
  * create a new list by adding an item add_entry(char*, int); file_stats is expected to have
  * a valid value.
  *
- * delete an item by calling del_entry(char*); it will delete an item with the name given
+ * delete the first item by calling delFirstEntryAndReturnHash(); it will delete the first item and
+ * return the hash
  *
- * find an item by calling getEntryByFilename(char*); returning a pointer to the item
+ * searching the linklist is not required and the functionality was removed
  *
  *
  ******************************************
@@ -43,8 +46,6 @@ int addEntry(int h) {
    *
    * Returns: int success status
    */
-  
-  //printf("ADD ITEM: %s\n", filename);
 
   struct entry* item1 = (struct entry*) malloc(sizeof(struct entry));
     

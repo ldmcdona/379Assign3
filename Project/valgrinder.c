@@ -1,3 +1,20 @@
+/******************************************
+ *
+ * valgrinder.c - Modified 2018-04-05
+ *
+ * Created by:
+ * Craig Lindsay 1391493
+ * Liam McDonald 1462799
+ *
+ * USEAGE:
+ * called via a bash script which parses the args for this program
+ *
+ * prints the number of pages in use for a given program using a sliding window
+ * of size windowSize
+ *
+ ******************************************
+ */
+
 #define _POSIX_SOURCE
 #define _GNU_SOURCE
 #include <stdio.h>
@@ -9,6 +26,13 @@
 #include "hash4.c"
 
 int digitsToInclude(int pgSize) {
+  /* maps the page size of the os (given by the user) to a count of digits in
+   * the memory pointer that are refering to the page
+   *
+   * Args: (int) page size
+   *
+   * Returns: (int) digits in memory pointer that refer to page
+   */
   if (pgSize <= 16) {return 7;}
   else if (pgSize <= 256) {return 6;}
   else if (pgSize <= 4096) {return 5;}
@@ -17,7 +41,17 @@ int digitsToInclude(int pgSize) {
 
 int main(int argc, char* argv[])
 {
-  //testLL();
+  /* MAIN
+   * prints the number of pages in use by the os while executing a program
+   * every time an instruction is run
+   *
+   * Args:
+   *     pageSize: size of each page in memory
+   *     windowSize: size of sliding window to report on
+   *     (optional) -i: ignores instructions
+   *
+   * Returns: int success status
+   */
   int windowSize = atoi(argv[2]);
   int pgSize = atoi(argv[1]);
   printf("%i, %i\n", windowSize, pgSize);

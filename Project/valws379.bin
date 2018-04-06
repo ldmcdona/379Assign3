@@ -1,5 +1,12 @@
+# valws379.bin - Modified 2018-04-05
+#
+# Created By:
+# Craig Lindsay 1391493
+# Liam McDonald 1462799
+#
+
 getopts i: option
 case $option in
-i) ./main.o $2 $3 $option;;
-*) ./main.o $1 $2;;
+i) ./valgrinder.o $2 $3 $option;;
+*) ./valgridner.o $1 $2;;
 esac
