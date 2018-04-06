@@ -1,4 +1,5 @@
 Craig Lindsay
+
 Liam McDonald
 
 We broke down the project into three major sections; the hash function, the linked list function, and general functionality.
